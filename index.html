@@ -5,7 +5,17 @@
 </head>
 <body>
 
-<!-- Include the Google API library -->
+<!-- Include the new Google Identity Services library for authentication -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+
+<!-- Replace 'YOUR_CLIENT_ID' with your actual OAuth client ID -->
+<div id="g_id_onload"
+     data-client_id="39525066759-a6j2g4ioongt4m2o2ak8scipfmam0fnq.apps.googleusercontent.com"
+     data-callback="handleCredentialResponse">
+</div>
+<div class="g_id_signin" data-type="standard"></div>
+
+<!-- Include the Google Sheets API library -->
 <script src="https://apis.google.com/js/api.js"></script>
 <script>
 function start() {
@@ -41,6 +51,12 @@ function start() {
 
 // Load the JavaScript client library and start the process
 gapi.load('client:auth2', start);
+
+// Callback function for handling credential response
+function handleCredentialResponse(response) {
+  // You can perform any necessary actions here
+  console.log('Credential response:', response);
+}
 </script>
 
 </body>
