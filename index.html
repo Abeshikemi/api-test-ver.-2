@@ -24,7 +24,7 @@ function start() {
     if (userInput) {
       // Make the API request to update the cell with user input
       return gapi.client.sheets.spreadsheets.values.update({
-        spreadsheetId: 'YOUR_SPREADSHEET_ID', // Replace with your spreadsheet ID
+        spreadsheetId: '1C6SIW0nGfjafl2mRFWTGgXpEL4Mc83TsPJFpvmqwLXc', // Replace with your spreadsheet ID
         range: 'Sheet1!C3',
         valueInputOption: 'RAW',
         values: [[userInput]],
