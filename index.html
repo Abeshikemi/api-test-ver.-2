@@ -1,10 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Test Page</title>
+  <title>Google Sheets API Example</title>
 </head>
 <body>
-  <h1>Hello, xxxxxxxxxxxxxxxxxGitHub Pages!</h1>
-  <p>This is a test page deployed on GitHub Pages.</p>
+
+<!-- Include the Google API library -->
+<script src="https://apis.google.com/js/api.js"></script>
+<script>
+function start() {
+  // Initialize the JavaScript client library with OAuth 2.0
+  gapi.client.init({
+    'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest'],
+    'clientId': '39525066759-a6j2g4ioongt4m2o2ak8scipfmam0fnq.apps.googleusercontent.com', // Replace with your OAuth client ID
+    'scope': 'https://www.googleapis.com/auth/spreadsheets',
+  }).then(function() {
+    // Sign in the user
+    return gapi.auth2.getAuthInstance().signIn();
+  }).then(function() {
+    // Get user input from a prompt dialog
+    var userInput = prompt('Enter the text to update the cell:');
+    
+    if (userInput) {
+      // Make the API request to update the cell with user input
+      return gapi.client.sheets.spreadsheets.values.update({
+        spreadsheetId: 'YOUR_SPREADSHEET_ID', // Replace with your spreadsheet ID
+        range: 'Sheet1!C3',
+        valueInputOption: 'RAW',
+        values: [[userInput]],
+      });
+    } else {
+      console.log('No input provided.');
+    }
+  }).then(function(response) {
+    console.log('Cell updated:', response);
+  }).catch(function(error) {
+    console.error('Error updating cell:', error);
+  });
+}
+
+// Load the JavaScript client library and start the process
+gapi.load('client:auth2', start);
+</script>
+
 </body>
 </html>
